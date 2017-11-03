@@ -47,7 +47,4 @@ def calcMPR(node):
 
 
 readingGraph()
-calcMPR("a")
-s1 = set([0,2,3])
-s2 = set([2,6])
-print s1 if len(s1)<len(s2) else s2
+calcMPR(0)
