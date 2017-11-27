@@ -2,7 +2,7 @@ import sys
 import ast
 
 Graph = {}
-MPRs = {}
+MPRs = set()
 
 def readingGraph():
     with open(sys.argv[1], 'r') as f:
@@ -10,12 +10,13 @@ def readingGraph():
         global Graph
         Graph = ast.literal_eval(s)
 
-def findBestNode(CurrSet):
+def findBestNode(CurrSet, Reach):
     best = None
     bestLen = 0
-    for node in Graph:
+    for node in Reach:
         if (best == None):
             best = node
+            bestLen = len(set(Graph[node]) - CurrSet)
         elif (len(set(Graph[node]) - CurrSet) > bestLen):
             best = node
             bestLen = len(set(Graph[node]) - CurrSet)
@@ -23,14 +24,22 @@ def findBestNode(CurrSet):
 
 def globalGreedyCDS():
     CDS = set()
-    while (len(set(Graph.keys() - CDS))>0):
-        best = findBestNode(CDS)
+    Reach = set()
+    Reach.add(findBestNode(CDS, Graph))
+    while (len(set(Graph.keys()) - CDS - Reach)>0):
+        best = findBestNode(CDS, Reach)
         CDS.add(best)
-        #Mudar pra reacheble (o loop tá errado)
+        Reach.remove(best)
+        Reach |= (set(Graph[best]) - CDS)
+    return CDS
+
+def calcMPR(node):
+    return set(Graph[node]) & MPRs
 
 
 
 
 
 readingGraph()
-globalGreedyCDS()
+MPRs = globalGreedyCDS()
+print MPRs

@@ -42,9 +42,9 @@ def calcMPR(node):
                 U.add(n2)
         S.append(t)
     S = sorted(S, key = lambda t: -len(t[1]))
-    print setCover(S,U)
+    return setCover(S,U)[0]
 
 
 
 readingGraph()
-calcMPR(0)
+print calcMPR(0)
