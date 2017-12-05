@@ -68,12 +68,12 @@ def floodAll():
                 t1 = flood(localGreedy, 0, Graphs[k])
                 t2 = flood(globalGreedy, 0, Graphs[k])
                 globalGreedy.MPRs.clear()
-                if(n < 3):
+                if(n < 50):
                     t3 = flood(setCover, 0, Graphs[k])
                 for l in range(3):
                     L[l] += t1[l]/5.0
                     G[l] += t2[l]/5.0
-                    if(n < 3):
+                    if(n < 50):
                         S[l] += t3[l]/5.0
             print L
             print G
