@@ -34,12 +34,7 @@ def globalGreedyCDS():
     return CDS
 
 def calcMPR(node):
+    if(len(MPRs) == 0):
+        global MPRs
+        MPRs = globalGreedyCDS()
     return set(Graph[node]) & MPRs
-
-
-
-
-
-readingGraph()
-MPRs = globalGreedyCDS()
-print MPRs

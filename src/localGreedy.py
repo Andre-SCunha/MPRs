@@ -53,9 +53,3 @@ def calcMPR(node):
         left.remove(best)
         left2.difference_update(Graph[best])
     return MPR
-
-
-
-readingGraph()
-#print calcEssential(Graph["a"])
-print calcMPR(0)
